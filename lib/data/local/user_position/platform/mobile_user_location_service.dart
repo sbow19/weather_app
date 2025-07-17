@@ -1,9 +1,4 @@
 import 'dart:async';
-
-///
-/// TODO: location.dart is specific to mobile. Conditionally import
-/// location services depending on device.
-///
 import 'package:location/location.dart';
 import 'package:weather_app/data/local/user_position/platform/location_service.dart';
 import 'package:weather_app/utils/env/env_variables.dart';
@@ -11,8 +6,7 @@ import 'package:weather_app/utils/logging/logger.dart';
 
 ///
 ///  Expose Stream of location data to dynamically update weather
-///  info based on user location. Initialised with platform specific
-///  interface for obtaining
+///  info based on user location.
 ///
 class MobileUserLocationService implements LocationService {
   static MobileUserLocationService? _instance;

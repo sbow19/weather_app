@@ -1,17 +1,20 @@
 # Default .env file
 ENV ?= dev
+
 .PHONY: test
 
 setup:
 	flutter pub get
 
-run-chrome: 
-	./scripts/run.sh $(ENV) chrome
-	setup
 
 run: 
 	./scripts/run.sh $(ENV)
 	setup
+
+run-chrome: 
+	./scripts/run.sh $(ENV) chrome
+	setup
+
 	
 prev: 
 	./scripts/run.sh prev
@@ -30,11 +33,7 @@ run-prod:
 	setup
 
 test: 
-	flutter test --dart-define=ENV=dev
-	setup
-
-lint:
-	flutter analyze
+	./scripts/run.sh test
 
 clean:
 	flutter clean

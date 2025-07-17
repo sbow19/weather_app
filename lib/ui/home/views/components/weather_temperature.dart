@@ -16,8 +16,7 @@ class WeatherTemperature extends StatelessWidget {
           loading: () => const Text("Fetching location..."),
           data: (data) => Text(
             "${data.current?.temp?.floor() ?? 0}°C",
-            style: Theme.of(context).textTheme.displayLarge
-            
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           error: (_, __) => const Text("Error fetching location"),
         );

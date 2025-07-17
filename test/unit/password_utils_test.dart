@@ -2,12 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/utils/auth/helper.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:weather_app/utils/env/env_variables.dart';
+import 'package:weather_app/utils/logging/logger.dart';
+import 'package:logger/logger.dart';
+
 
 void main() {
   group('Password hashing', () {
     const password = 'MySecurePassword123';
 
     setUp(() async {
+      EnvVariablesService(loggerService: LoggerService(
+        logger: Logger(), 
+        loggerOptions: LoggerOptions()
+      ));
       await EnvVariablesService.loadEnvs();
     });
 
@@ -30,8 +37,11 @@ void main() {
 
     setUp(() async {
       hash = hashPassword(password);
+      EnvVariablesService(loggerService: LoggerService(
+        logger: Logger(), 
+        loggerOptions: LoggerOptions()
+      ));
       await EnvVariablesService.loadEnvs();
-
     });
 
     test('returns true if password matches hash', () {

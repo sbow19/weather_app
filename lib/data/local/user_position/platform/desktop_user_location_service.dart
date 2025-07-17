@@ -2,10 +2,14 @@ import 'dart:async';
 import 'dart:js_interop';
 import 'package:web/web.dart';
 import 'location_service.dart';
-import 'package:location/location.dart'; // for LocationData type or create your own
+import 'package:location/location.dart'; 
 import 'package:weather_app/utils/logging/logger.dart';
 import 'package:weather_app/utils/env/env_variables.dart';
 
+
+///
+/// Specific code to enable js_interop. TODO: refactor
+///
 @JS()
 @staticInterop
 class Position {}

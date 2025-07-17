@@ -1,23 +1,13 @@
-///
-/// Wrapper over local secure store object provided by flutter_secure_storage, which
-/// itself wraps an instance of a local db connection.
-///
-/// The actual singleton is injected into this service
-///
-/// NOTE:
-///
-/// We only expose the write, read, and delete methods here,
-/// as we don't want to accidentally invoke a deleteAll function or
-/// readAll function, which would compromise all keys in secure storage.
-///
-
 import 'package:weather_app/data/local/auth/platform/secure_storage.dart';
 import 'package:weather_app/utils/env/env_variables.dart';
 import 'package:weather_app/utils/logging/logger.dart';
 
+///
+/// Wrapper for platform-specific secure store services.
+///
+
 class LocalSecureStoreService {
-  // Create single private instance of local secure store object when first loaded
-  // Initialized when LocalSecureStore constructor first called.
+  // Create single private instance when first loaded
   static LocalSecureStoreService? _instance;
 
   final LoggerService _loggerService;
@@ -41,7 +31,6 @@ class LocalSecureStoreService {
     return _instance!;
   }
 
-  // Define named private constructor logic. For every new object
   LocalSecureStoreService._internal({
     required EnvVariablesService envVariablesService,
     required LoggerService loggerService,

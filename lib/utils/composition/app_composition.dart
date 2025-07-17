@@ -23,7 +23,7 @@ Future<AppViewModel> composeAppViewModel() async{
   // Get logger log level
   String logLevel = envService.getEnv("LOG_LEVEL") ?? "debug";
   // Update log level globally according to .env
-  LoggerService.updateLevel(logLevel);
+  loggerService.updateLevel(logLevel);
 
   return AppViewModel(
     loggerService: loggerService, 

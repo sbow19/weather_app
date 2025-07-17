@@ -16,7 +16,7 @@ class WeatherTime extends StatelessWidget {
           loading: () => const Text("Fetching time..."),
           data: (data) => Text(
             formatTime(data.current?.dt ?? 0),
-            style: Theme.of(context).textTheme.displaySmall
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           error: (_, __) => const Text("Error fetching time"),
         );

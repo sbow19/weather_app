@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 WeatherViewModel composeWeatherViewModel() {
   EnvVariablesService envVariablesService =
       EnvVariablesService.envVariablesService;
-  LoggerService loggerService = LoggerService.loggerService;
+  LoggerService? loggerService = LoggerService.loggerService;
 
   ///
   /// Weather API service
@@ -32,7 +32,7 @@ WeatherViewModel composeWeatherViewModel() {
       weatherService = WeatherAPIService(
         httpClient: http.Client(),
         envVariablesService: envVariablesService,
-        loggerService: loggerService,
+        loggerService: loggerService!,
       );
       break;
   }
@@ -40,7 +40,7 @@ WeatherViewModel composeWeatherViewModel() {
   WeatherAPIRepository weatherAPIRepository = WeatherAPIRepository(
     weatherAPIService: weatherService,
     envVariablesService: envVariablesService,
-    loggerService: loggerService,
+    loggerService: loggerService!,
   );
 
   ///

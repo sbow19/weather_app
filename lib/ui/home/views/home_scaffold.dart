@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/app/app_view_model.dart';
-import 'package:weather_app/components/navigation/bottom_nav.dart';
-import 'package:weather_app/components/navigation/drawer.dart';
-import 'package:weather_app/ui/home/view_models/weather_view_model.dart';
 import 'package:weather_app/ui/home/views/weather_view_scaffold.dart';
 import 'package:weather_app/utils/composition/weather_composition.dart';
-
-final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 class HomeScaffold extends StatefulWidget {
   const HomeScaffold({super.key});
@@ -16,11 +11,6 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  // Current home page view. Accessed by navigation tab
-  int selectedIndex = 0;
-
-  // List of home widgets
-  final List<Widget> _screens = [WeatherViewScaffold()];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +21,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         ChangeNotifierProvider(create: (_) => composeWeatherViewModel()),
       ],
       child: Scaffold(
-        key: homeScaffoldKey,
         extendBodyBehindAppBar: true,
         extendBody: true,
 
@@ -43,7 +32,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           ),
           elevation: 0,
         ),
-        body: IndexedStack(index: selectedIndex, children: _screens),
+        body: WeatherViewScaffold(),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.fromLTRB(32, 0, 32, 80),
           child: Row(
@@ -54,7 +43,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           ),
         ),
 
-        // drawer: AppDrawer(),
       ),
     );
   }

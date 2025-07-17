@@ -9,30 +9,36 @@ import 'package:weather_app/utils/logging/logger.dart';
 
 AuthViewModel composeAuthViewModel() {
 
+  // Generic secureStorage interface
   SecureStorage secureStorage;
   EnvVariablesService envVariablesService = EnvVariablesService.envVariablesService;
 
   String env = envVariablesService.getEnv("ENV");
 
   switch (env) {
+    // In preview mode
     case "prev":
       secureStorage = FakeSecureStorage();
       break;
+    
+    // Any other mode, get storage API
     default:
+
+      // Imports either web or mobile  storage API
       secureStorage = getSecureStorage();
       break;
   }
  
   return AuthViewModel(
     localSensitiveDataRepository: LocalSensitiveDataRepository(
-      loggerService: LoggerService.loggerService,
+      loggerService: LoggerService.loggerService!,
       localSecureStoreService: LocalSecureStoreService(
-        loggerService: LoggerService.loggerService,
+        loggerService: LoggerService.loggerService!,
         secureStorage: secureStorage,
         envVariablesService: EnvVariablesService.envVariablesService
       )
     ),
-    loggerService: LoggerService.loggerService
+    loggerService: LoggerService.loggerService!
   );
   
 }

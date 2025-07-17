@@ -20,10 +20,17 @@ class WeatherViewModel extends ChangeNotifier {
 
   late final StreamSubscription<WeatherAPIModel> _weatherStream;
 
+  ///
+  /// _weatherStream updated weather.value. Changes to this value 
+  ///  notifiers listening widgets.
+  ///
   final ValueNotifier<AsyncWrapper<WeatherAPIModel>> weather = ValueNotifier(
     AsyncWrapper.loading(),
   );
 
+  ///
+  /// Singleton instance constructor
+  ///
   factory WeatherViewModel({
     required WeatherAPIRepository weatherAPIrepository,
     required EnvVariablesService envVariablesService,
@@ -49,11 +56,20 @@ class WeatherViewModel extends ChangeNotifier {
        _envVariablesService = envVariablesService,
        _loggerService = loggerService,
        _userLocationRepository = userLocationRepository {
+
+    ///
+    /// Start  weather stream when object is first constructed;
+    /// remains a Singleton. Disposed when widget unmounts.
+    ///
     startWeatherStream();
   }
 
   // Start listening to weather date stream and update data in ViewModel
   void startWeatherStream() {
+
+    /// Extends user location stream with Open Weather API request
+    /// When stream receives changes, the listen() updates weather.value
+    /// notifying UI.
     _weatherStream = _userLocationRepository.locationStream
         .asyncMap((locationData) async {
           final lat = locationData.latitude!;
@@ -80,11 +96,9 @@ class WeatherViewModel extends ChangeNotifier {
         );
   }
 
-  // Explicit API call from UI
+  // Explicit API call--> UNUSED
   Future<WeatherAPIModel> queryWeatherAPI() async {
-    ///
-    /// Explicitly fetch location data
-    ///
+
     LocationData locationData = await _userLocationRepository.getUserLocation();
     _loggerService.i("${locationData.latitude} ${locationData.longitude}");
 

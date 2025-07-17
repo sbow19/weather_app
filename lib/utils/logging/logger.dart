@@ -2,35 +2,44 @@ import 'package:logger/logger.dart';
 
 class LoggerService {
   // Singleton instance of logger service
-  static Logger? _logger;
-  static LoggerOptions? _loggerOptions;
-  static final LoggerService _instance = LoggerService._internal();
+  static LoggerService? _instance;
 
-  // Logger and LoggerOptions injected following Dependency Injection
+  // Return instance of logger
+  static LoggerService? get loggerService => _instance;
+  
+  Logger _logger;
+  final LoggerOptions _loggerOptions;
+
+  ///
+  /// Singleton constructor logic
+  ///
   factory LoggerService({
     required Logger logger,
     required LoggerOptions loggerOptions,
   }) {
-    _logger ??= logger;
-    _loggerOptions ??= loggerOptions;
+    _instance ??= LoggerService._internal(
+      logger:logger,
+      loggerOptions: loggerOptions
+    );
 
-    return _instance;
+    return _instance!;
   }
 
-  // Named constructor --> do nothing
-  LoggerService._internal();
+  LoggerService._internal({
+    required Logger logger,
+    required LoggerOptions loggerOptions,
+  }): _logger = logger, 
+  _loggerOptions = loggerOptions;
 
-  // Return instance of logger
-  static LoggerService get loggerService => _instance;
-
+  
   ///  Logger package doesn't support runtime updates to log levels,
   /// so need to create new Logger object with different options
-  static void updateLevel(String levelRaw) {
+  void updateLevel(String levelRaw) {
     _logger = Logger(
       level: _parseLevel(levelRaw),
-      filter: _loggerOptions!.logFilter,
-      printer: _loggerOptions!.logPrinter,
-      output: _loggerOptions!.logOutput,
+      filter: _loggerOptions.logFilter,
+      printer: _loggerOptions.logPrinter,
+      output: _loggerOptions.logOutput,
     );
   }
 
@@ -51,15 +60,17 @@ class LoggerService {
 }
 
   // Expose Logger functions  
-  void d(String message) => _logger!.d(message);
-  void i(String message) => _logger!.i(message);
-  void w(String message) => _logger!.w(message);
+  void d(String message) => _logger.d(message);
+  void i(String message) => _logger.i(message);
+  void w(String message) => _logger.w(message);
   void e(String message, [Object? error, StackTrace? stackTrace]) =>
-      _logger!.e(message);
+      _logger.e(message);
 
 }
 
-//
+///
+/// 
+///
 class LoggerOptions {
   LogFilter? logFilter;
   LogPrinter? logPrinter;

@@ -59,6 +59,8 @@ flutter:
       - lib/config/.env.dev
       - lib/config/.env.prod
       - lib/config/.env.prev
+      - lib/config/.env.test
+
 
       - assets/mobile/
       - assets/desktop/

@@ -4,37 +4,41 @@ import 'package:weather_app/utils/logging/logger.dart';
 class EnvVariablesService {
 
   // Create singleton instance
-  static final EnvVariablesService _instance = EnvVariablesService._internal();
-  static LoggerService? _loggerService;
+  static  EnvVariablesService? _instance;
+
+
+  final LoggerService _loggerService;
 
   factory EnvVariablesService({
     required loggerService
   }){
 
-    _loggerService ??= loggerService;
+    _instance ??= EnvVariablesService._internal(
+      loggerService: loggerService
+    );
 
     // Assign _logger once
-    return _instance;
+    return _instance!;
   }
 
   // internal constructor --> do nothing
-  EnvVariablesService._internal();
+  EnvVariablesService._internal({
+    required loggerService
+  }): _loggerService = loggerService;
 
   // Return instance of EnvVariableService
-  static EnvVariablesService get envVariablesService => _instance;
+  static EnvVariablesService get envVariablesService => _instance!;
 
-  /**
-   *  Method is called at beginning of app, prior to instantiation of
-   *  logger service.
-   */
+
+  ///  Method is called at beginning of app, prior to instantiation of
+  ///  logger service.
   static Future<void> loadEnvs() async {
     // Load in env dependent config
-    const env = String.fromEnvironment('ENV', defaultValue: 'dev');
-    final envPath = 'lib/config/.env.$env';
+    const env = String.fromEnvironment('ENV_FILE', defaultValue: 'lib/config/.env.dev');
 
     try {
       // Load env
-      await dotenv.load(fileName: envPath);
+      await dotenv.load(fileName: env);
     } on Exception catch(e){
       print(e);
       // Exit application
@@ -48,7 +52,7 @@ class EnvVariablesService {
     dynamic env = dotenv.env[envName] ;
 
     if(env == null){
-      _loggerService!.e("Invalid environment variable: $envName");
+      _loggerService.e("Invalid environment variable: $envName");
     }
     return env;
   }

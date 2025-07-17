@@ -6,7 +6,6 @@ import 'package:weather_app/utils/logging/logger.dart';
 ///
 /// Wrapper for user position service.
 ///
-///
 class UserLocationRepository {
   // Singleton initialiser
   static UserLocationRepository? _instance;
@@ -36,6 +35,7 @@ class UserLocationRepository {
        _loggerService = loggerService,
        _userLocationService = userLocationService;
 
+
   Future<LocationData> getUserLocation() async {
     try {
       return await _userLocationService.getUserLocation();
@@ -44,10 +44,9 @@ class UserLocationRepository {
       rethrow;
     }
   }
-
+  
   Stream<LocationData> get locationStream =>
       _userLocationService.locationStream.handleError((e) {
-      // Handle error here (e.g., log, report, notify UI)
       _loggerService.e('Location stream error: ${e.toString()}');
       throw e;
     });

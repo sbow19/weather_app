@@ -50,7 +50,6 @@ class WeatherAPIRepository {
   }) async {
     final now = DateTime.now();
 
-    // If within throttle window, return cached result
     _loggerService.i('''
       Now: $now
       Last fetch time: $_lastFetchTime 
@@ -59,6 +58,7 @@ class WeatherAPIRepository {
 
       ''');
 
+    // If within throttle window, return cached result
     if (now.difference(_lastFetchTime) < _pollInterval &&
         _cachedWeatherResult != null) {
       return _cachedWeatherResult!;
@@ -76,6 +76,7 @@ class WeatherAPIRepository {
         case 200:
           final jsonData = jsonDecode(response.body);
 
+          // Create Dart object/data model of json response
           WeatherAPIModel weatherAPIModel = WeatherAPIModel.fromJson(jsonData);
           _cachedWeatherResult = weatherAPIModel;
           _lastFetchTime = now;

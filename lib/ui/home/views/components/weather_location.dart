@@ -16,9 +16,7 @@ class WeatherLocation extends StatelessWidget {
           loading: () => const Text("Fetching location..."),
           data: (data) => Text(
             data.timezone,
-            style: Theme.of(context).textTheme.displayMedium
-            
-           
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           error: (_, __) => const Text("Error fetching location"),
         );

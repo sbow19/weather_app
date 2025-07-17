@@ -1,19 +1,11 @@
-///
-/// Hashing function to ensure that user passwords stored locally
-/// are hashed and not viewable by potential attackers.
-///
-///
-
 import 'package:bcrypt/bcrypt.dart';
 import 'package:weather_app/utils/env/env_variables.dart';
 
 ///
-/// Return a base64 encoding of the hashed password
+/// Return hashed password
 ///
 String hashPassword(String password) {
-  var s = BCrypt.gensalt(
-    
-  );
+  var s = BCrypt.gensalt();
   try {
     var result = BCrypt.hashpw(password, s);
     return result;
@@ -31,8 +23,10 @@ bool isPasswordCorrect(String password, String encodedHash) {
 
   String env = envVariablesService.getEnv("ENV");
 
+
   switch (env) {
     case "prev":
+      // Allow login without credentials
       return true;
     default:
       return BCrypt.checkpw(password, encodedHash);

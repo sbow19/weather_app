@@ -1,6 +1,10 @@
 import 'package:intl/intl.dart';
 import 'package:weather_app/data/external/model/weather_api_model.dart';
 
+///
+/// UI content helper functions
+///
+
 String formatTime(int dt) {
   DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
   return DateFormat.Hm().format(dateTime);

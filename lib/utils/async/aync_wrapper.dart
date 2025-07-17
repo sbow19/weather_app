@@ -1,7 +1,7 @@
+
 ///
 /// Wrapper class to expose Future states in a clean way
 ///
-
 class AsyncWrapper<T> {
 
   final T? data;    // Expected data type on async completion

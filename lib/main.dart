@@ -8,11 +8,13 @@ import 'package:weather_app/utils/composition/auth_composition.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialise AppViewModel
   AppViewModel appViewModel = await composeAppViewModel();
 
+  // Fix in landscape mode
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-    // Or use landscapeLeft / landscapeRight for landscape apps
   ]);
 
   // Build widget tree
@@ -20,6 +22,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => appViewModel),
+        
         ChangeNotifierProvider(create: (_) => composeAuthViewModel()),
       ],
       child: MyApp(),
