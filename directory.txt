@@ -1,0 +1,94 @@
+.
+├── .gitignore
+|
+├── Makefile                    # Entry point - centralised start up commands
+|
+├── pubspec.yaml
+|
+├── README.md
+|
+├── assets                      # Assets separated by device type    
+|   ├── desktop
+│   ├── mobile
+│   └── icons
+|
+|
+├── scripts                     # Configure envs and flutter build commands. Ran via Makefile.
+│   └── run.sh
+|
+|
+├── test                        
+│   └── unit
+│       ├── password_utils_test.dart
+│       ├── weather_api_options_test.dart
+│       └── weather_utils_test.dart
+|
+├── lib
+│   ├── main.dart              # App entry point - sets global ViewMode providers.
+│   ├── app
+│   │   ├── app.dart           
+│   │   └── app_view_model.dart
+│   ├── components
+│   │   └── navigation
+│   │       ├── bottom_nav.dart
+│   │       └── drawer.dart
+│   ├── config
+│   │   ├── .env.dev
+│   │   ├── .env.prev
+│   │   ├── .env.prod
+│   │   └── .env.test
+│   ├── data
+│   │   ├── external
+│   │   │   ├── model
+│   │   │   │   ├── weather_api_model.dart
+│   │   │   │   ├── weather_api_model.freezed.dart
+│   │   │   │   └── weather_api_model.g.dart
+│   │   │   ├── weather_api_repository.dart
+│   │   │   ├── weather_api_service.dart
+│   │   │   └── weather_service.dart
+│   │   ├── fake_data_services
+│   │   │   ├── fake_secure_storage.dart
+│   │   │   ├── fake_user_location_service.dart
+│   │   │   └── fake_weather_service.dart
+│   │   └── local                                           # Data services from local device
+│   │       ├── auth                                        
+│   │       │   ├── local_sensitive_data_repository.dart    # Repository layer handles errors, timeouts, logging and data modelling
+│   │       │   ├── local_sensitive_data_service.dart       # Service interface accepting platform specific wrapper under platform/  
+│   │       │   └── platform
+│   │       └── user_position
+│   │           ├── platform
+│   │           ├── user_location_repository.dart           # Repository layer handles errors, timeouts, logging and data modelling
+│   │           └── user_location_service.dart              # Service interface accepting platform specific wrapper under platform/  
+│   ├── ui                                     # UI layer consists of two separate scaffolds: auth and home
+│   │   ├── auth
+│   │   │   ├── view_models
+│   │   │   │   └── auth_view_model.dart       # ViewModel layer acts between UI and secure storage layers
+│   │   │   └── views
+│   │   │       ├── auth_scaffold.dart         # Layout scaffold for login flow.
+│   │   │       ├── login_view.dart            # Login View
+│   │   │       └── signup_view.dart           # Signup View
+│   │   └── home
+│   │       ├── view_models
+│   │       │   └── weather_view_model.dart
+│   │       └── views
+│   │           ├── components
+│   │           ├── desktop_weather_layout.dart
+│   │           ├── home_scaffold.dart
+│   │           ├── mobile_weather_layout.dart
+│   │           └── weather_view_scaffold.dart
+│   └── utils
+│       ├── async
+│       │   └── aync_wrapper.dart               # Wrapper class exposes future state to View UI.
+│       ├── auth
+│       │   └── helper.dart
+│       ├── composition                         # Initialise ViewModel, Repository and Service dependencies
+│       │   ├── app_composition.dart            # Initialise global app ViewModel
+│       │   ├── auth_composition.dart           # Initialise secure storage (e.g. FlutterSecureStorage)
+│       │   └── weather_composition.dart        # Initialise OpenWeatherAPI and user location services
+│       ├── env             
+│       │   └── env_variables.dart              # Singleton class for accessing env variables
+│       ├── logging
+│       │   └── logger.dart                     # Singleton class for accessing logger
+│       └── weather
+│           └── weather_helper.dart             # Utility functions for weather View UI
+
