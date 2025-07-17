@@ -59,8 +59,8 @@ Many thanks for reviewing my project — I'm excited to share it with you and he
 Create.env.dev file in the lib/config directory and add the following variables:
 
 ```env
-API_KEY="YourAPIKey"
-ENV="prev"
+API_KEY="<YourAPIKey>"
+ENV="dev"
 # General vars
 APP_NAME="Open Weather API"
 APP_VERSION="0.0.1"
