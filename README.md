@@ -87,8 +87,7 @@ Create .env.prod, .env.test without any variables.
 
 To start live services for mobile, run ```make run```, and for chrome run ```make run-chrome```.
 
-> **Note** Chrome blocks network requests to Open Weather API are blocked in the browser
-> by CORS policy. 
+> **Note** Chrome blocks network requests to Open Weather API via CORS policy. 
 >
 > To preview the Chrome version with dummy services, run ```make prev-chrome```
 >
