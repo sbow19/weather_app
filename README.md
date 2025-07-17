@@ -56,12 +56,34 @@ Many thanks for reviewing my project — I'm excited to share it with you and he
 
 ## Getting started
 
-Create a .env.dev file in the config directory and add your OpenWeather API key:
+Create.env.dev file in the lib/config directory and add the following variables:
 
 ```env
-API_KEY="yourAPIKey"
+API_KEY="YourAPIKey"
+ENV="prev"
+# General vars
+APP_NAME="Open Weather API"
+APP_VERSION="0.0.1"
+
+# Debug config
+DEBUG_MODE=true
+ENABLE_LOCAL_AUTH=false
+LOG_LEVEL="debug"
+
+# Open Weather API variables
+API_URL="https://openweathermap.org/api/one-call-3"
+DEFAULT_CITY="London"
+USE_GEOLOCATION=false
+
+# HTTP config
+POLL_INTERVAL_SECONDS=60
+API_TIMEOUT=5000
 
 ```
+
+Create .env.prev in lib/config/ add all of the above variables, but leave **API_KEY** blank.
+
+Create .env.prod, .env.test without any variables.
 
 To start live services for mobile, run ```make run```, and for chrome run ```make run-chrome```.
 
