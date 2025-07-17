@@ -95,5 +95,5 @@ To start live services for mobile, run ```make run```, and for chrome run ```mak
 
 ## Project Structure
 
-**See [Directory structure](directory.txt)for details about directory structure**
+**See [Directory structure](directory.txt) for details about directory structure**
 
