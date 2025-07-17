@@ -33,7 +33,7 @@ Many thanks for reviewing my project — I'm excited to share it with you and he
 
 ---
 
-## 💡 Best Practices and Techniques
+## Best Practices and Techniques
 
 - **MVVM architecture** separates concerns:
   - `View`: UI logic only
