@@ -85,7 +85,7 @@ Create .env.prev in lib/config/ add all of the above variables, but leave **API_
 
 Create .env.prod, .env.test without any variables.
 
-To start live services for mobile, run ```make run```, and for chrome run ```make run-chrome```.
+To start live services for mobile, run ```make run```, and for Chrome run ```make run-chrome```.
 
 > **Note** Chrome blocks network requests to Open Weather API via CORS policy. 
 >
